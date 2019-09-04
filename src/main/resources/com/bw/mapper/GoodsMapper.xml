@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bw.mapper.GoodsDao">
+	<select id="listGoods" resultType="goods">
+		select g.*,c.cname,b.bname from goods g,brand b,category c where g.bid=b.bid and g.cid=c.cid 
+	</select>
+	
+	<select id="listCate" resultType="category">
+		select * from category
+	</select>
+	
+	<select id="listBrand" resultType="brand">
+		select * from brand
+	</select>
+	
+	<insert id="addGoods" parameterType="goods">
+		insert into goods(gname,gdesc,price,cid,bid) values(#{gname},#{gdesc},#{price},#{cid},#{bid})
+	</insert>
+	
+	<select id="findgid" resultType="goods" parameterType="int">
+		select g.*,c.cname,b.bname from goods g,brand b,category c where g.bid=b.bid and g.cid=c.cid and g.gid=#{0}
+	</select>
+	
+	<update id="updateGoods" parameterType="goods">
+		update goods set gname=#{gname},gdesc=#{gdesc},price=#{price},cid=#{cid},bid=#{bid} where gid=#{gid}
+	</update>
+	
+	
+</mapper>
